@@ -44,8 +44,8 @@ const legacyProblems = [
 ];
 const problems = [];
 
-let current = Number(localStorage.getItem("go-kids-level") || 0);
-let solved = new Set(JSON.parse(localStorage.getItem("go-kids-solved") || "[]"));
+let current = Number(localStorage.getItem("yuyu-go-level") || 0);
+let solved = new Set(JSON.parse(localStorage.getItem("yuyu-go-solved") || "[]"));
 current = Math.min(Math.max(current, 0), problems.length - 1);
 let passed = false;
 
@@ -98,16 +98,16 @@ function choose(pos, cell) {
   const correct = problems[current].answers.some(a => key(a) === key(pos));
   if (correct) {
     passed = true; cell.classList.remove("choice"); cell.classList.add(problems[current].answerColor || "black", "correct");
-    solved.add(current); localStorage.setItem("go-kids-solved", JSON.stringify([...solved]));
-    localStorage.setItem("go-kids-level", String(current));
+    solved.add(current); localStorage.setItem("yuyu-go-solved", JSON.stringify([...solved]));
+    localStorage.setItem("yuyu-go-level", String(current));
     message.className = "message success"; message.textContent = current === problems.length - 1 ? `太棒了！你完成了全部 ${problems.length} 关！` : "答对啦！这一关通过。";
     next.disabled = false; el("stars").textContent = `⭐ ${solved.size}`;
     el("progress-bar").style.width = `${(solved.size / problems.length) * 100}%`;
   } else { message.className = "message error"; message.textContent = "再想一想：先数一数每一块棋还有几口气。"; }
 }
 el("hint-button").addEventListener("click", () => { const a = problems[current].answers[0]; message.className = "message"; message.textContent = `提示：试试第 ${a[0] + 1} 列、第 ${a[1] + 1} 行的交叉点。`; });
-next.addEventListener("click", () => { current = (current + 1) % problems.length; localStorage.setItem("go-kids-level", String(current)); render(); });
-el("reset-progress").addEventListener("click", () => { if (confirm("确定重新开始吗？闯关星星会清零。")) { solved = new Set(); current = 0; localStorage.removeItem("go-kids-solved"); localStorage.setItem("go-kids-level", "0"); render(); } });
+next.addEventListener("click", () => { current = (current + 1) % problems.length; localStorage.setItem("yuyu-go-level", String(current)); render(); });
+el("reset-progress").addEventListener("click", () => { if (confirm("确定重新开始吗？闯关星星会清零。")) { solved = new Set(); current = 0; localStorage.removeItem("yuyu-go-solved"); localStorage.setItem("yuyu-go-level", "0"); render(); } });
 function sourcePoint(point) {
   return [point.charCodeAt(0) - 97, point.charCodeAt(1) - 97];
 }
