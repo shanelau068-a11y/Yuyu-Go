@@ -17,6 +17,20 @@
     $('next-tip').textContent = next;
   }
   function setTurn(text) { $('turn-card').textContent = text; }
+  function hideHint() {
+    suggestion = null;
+    $('next-tip-card').classList.add('hidden');
+    $('hint-button').textContent = '💡 看提示';
+  }
+  function showHint() {
+    if (thinking || finished || current !== HUMAN) return;
+    const advice = humanAdvice();
+    suggestion = advice.move ? { x: advice.move.x, y: advice.move.y } : null;
+    $('next-tip').textContent = advice.text;
+    $('next-tip-card').classList.remove('hidden');
+    $('hint-button').textContent = '收起提示';
+    render();
+  }
   function renderLabels() {
     $('column-labels').innerHTML = letters.split('').map(letter => `<span>${letter}</span>`).join('');
     $('row-labels').innerHTML = Array.from({ length: SIZE }, (_, y) => `<span>${SIZE - y}</span>`).join('');
@@ -176,7 +190,7 @@
   }
   function humanMove(x, y) {
     if (thinking || finished || current !== HUMAN || board[y][x] !== EMPTY) return;
-    board[y][x] = HUMAN; lastMove = { x, y, color: HUMAN }; suggestion = null;
+    board[y][x] = HUMAN; lastMove = { x, y, color: HUMAN }; hideHint();
     const humanInfo = evaluateMove(x, y, HUMAN); // occupied now, only used for friendly explanation below
     render();
     if (winnerAt(x, y, HUMAN)) { finish(HUMAN, '太棒了，语语连成五子获胜！这说明你找到了能够延伸的一条线。'); return; }
@@ -190,7 +204,7 @@
     const move = hard ? hardMove() : easyMove();
     board[move.y][move.x] = AI; lastMove = { x: move.x, y: move.y, color: AI }; thinking = false;
     if (winnerAt(move.x, move.y, AI)) { render(); finish(AI, `电脑在 ${coord(move.x, move.y)} 连成五子。本局结束，但你可以从它的最后一步学会先看四连。`); return; }
-    current = HUMAN; const advice = humanAdvice(); suggestion = advice.move ? { x: advice.move.x, y: advice.move.y } : null;
+    current = HUMAN; const advice = humanAdvice(); hideHint();
     setTurn('轮到语语下棋 · 先看右边的下一步建议');
     message.className = 'message'; message.textContent = `电脑下在 ${coord(move.x, move.y)}。轮到语语。`;
     setCoach(`电脑下在 ${coord(move.x, move.y)}。`, move.reason, advice.text);
@@ -205,13 +219,17 @@
     render();
   }
   function resetGame() {
-    board = newBoard(); current = HUMAN; thinking = false; finished = false; lastMove = null; suggestion = { x: 7, y: 7 };
+    board = newBoard(); current = HUMAN; thinking = false; finished = false; lastMove = null; hideHint();
     message.className = 'message'; message.textContent = '点击一个交叉点开始下棋。';
     setTurn('轮到语语下棋');
     setCoach('开局先占住中心附近。', '中心的棋子最灵活：横、竖、两条斜线都能继续发展。', '第一手试试棋盘中央的 H8。');
     render();
   }
   $('new-game').addEventListener('click', resetGame);
+  $('hint-button').addEventListener('click', () => {
+    if ($('next-tip-card').classList.contains('hidden')) showHint();
+    else { hideHint(); render(); }
+  });
   $('difficulty').addEventListener('change', resetGame);
   renderLabels(); resetGame();
 })();
