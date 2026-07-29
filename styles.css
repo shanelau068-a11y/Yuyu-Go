@@ -5,18 +5,20 @@ button, select { font: inherit; }
 button { cursor: pointer; }
 .app-shell { width: min(100%, 1060px); min-height: 100vh; margin: 0 auto; padding: 24px 20px 32px; }
 header { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-h1 { margin: 2px 0 0; font-size: clamp(28px, 5vw, 40px); letter-spacing: .03em; }
+h1 { margin: 2px 0 0; font-size: clamp(23px, 3vw, 32px); letter-spacing: .03em; }
 .eyebrow { margin: 0; color: #a26b3c; font-size: 14px; }
-.controls { display: flex; align-items: center; justify-content: center; gap: 9px; padding: 7px; border: 1px solid #eacda6; border-radius: 13px; background: #fffdf8; }
-.controls label { display: flex; align-items: center; gap: 8px; color: #704a2e; font-weight: 800; }
-select { border: 1px solid #d8b27f; border-radius: 9px; padding: 8px; background: #fff; color: #4f3420; }
-.primary-button { border: 0; border-radius: 10px; padding: 10px 15px; color: #fff; background: #d96b2c; box-shadow: 0 3px 0 #a8491a; font-weight: 800; }
-.secondary-button { border: 1px solid #d8b27f; border-radius: 10px; padding: 9px 13px; color: #704a2e; background: #fff8ed; font-weight: 800; }
+.controls { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 5px 6px; border: 1px solid #eacda6; border-radius: 11px; background: #fffdf8; font-size: 13px; }
+.controls label { display: flex; align-items: center; gap: 5px; color: #704a2e; font-weight: 800; }
+select { border: 1px solid #d8b27f; border-radius: 8px; padding: 6px 7px; background: #fff; color: #4f3420; }
+.primary-button { border: 0; border-radius: 8px; padding: 7px 10px; color: #fff; background: #d96b2c; box-shadow: 0 2px 0 #a8491a; font-weight: 800; }
+.secondary-button { border: 1px solid #d8b27f; border-radius: 8px; padding: 6px 9px; color: #704a2e; background: #fff8ed; font-weight: 800; }
 .quick-learn { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 12px; max-width: 760px; margin: 10px auto 8px; padding: 8px 12px; border-radius: 12px; background: #fff1d3; color: #795027; font-size: 13px; }
 .quick-learn strong { color: #9a4f22; }
 .game-layout { display: grid; grid-template-columns: minmax(300px, 590px) minmax(245px, 330px); justify-content: center; align-items: start; gap: 22px; margin-top: 2px; }
 .board-column { min-width: 0; }
-.turn-card { max-width: 570px; margin: 0 auto 9px; padding: 9px 13px; border-radius: 11px; background: #fff1cf; color: #70491e; text-align: center; font-size: 14px; font-weight: 800; }
+.move-guide { max-width: 570px; margin: 0 auto 9px; padding: 8px 11px; border-radius: 11px; background: #fff3d8; color: #68451e; }
+.move-guide strong { font-size: 14px; }
+.move-guide p { margin: 4px 0 0; line-height: 1.45; font-size: 13px; }
 .board-coordinate-shell { --size: min(76vw, 570px); display: grid; grid-template-columns: 24px var(--size); grid-template-rows: 21px var(--size); margin: 0 auto; }
 .coordinate-labels { display: grid; color: #8a6240; font-size: 11px; font-weight: 800; line-height: 1; user-select: none; }
 .coordinate-labels span { display: flex; align-items: center; justify-content: center; }
@@ -39,11 +41,10 @@ select { border: 1px solid #d8b27f; border-radius: 9px; padding: 8px; background
 .coach-title span { font-size: 21px; }
 .coach-card h3 { margin: 0; font-size: 19px; }
 .coach-card > p { margin: 10px 0 14px; color: #634e40; line-height: 1.6; font-size: 14px; }
-.coach-rule, .next-tip { border-radius: 11px; padding: 10px 11px; }
-.coach-rule { background: #fff3d8; color: #68451e; }
+.next-tip { border-radius: 11px; padding: 10px 11px; }
 .next-tip { margin-top: 9px; background: #e9f8ed; color: #256a43; }
-.coach-rule strong, .next-tip strong { font-size: 14px; }
-.coach-rule p, .next-tip p { margin: 5px 0 0; line-height: 1.5; font-size: 13px; }
+.next-tip strong { font-size: 14px; }
+.next-tip p { margin: 5px 0 0; line-height: 1.5; font-size: 13px; }
 .coord-note { margin: 13px 0 0; color: #9a7658; font-size: 12px; line-height: 1.45; }
 .message { min-height: 25px; margin: 16px auto 5px; text-align: center; color: #705844; font-weight: 800; }
 .message.success { color: #17703c; }

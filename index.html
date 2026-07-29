@@ -33,7 +33,10 @@
 
       <section class="game-layout">
         <div class="board-column">
-          <div class="turn-card" id="turn-card" aria-live="polite">轮到语语下棋</div>
+          <section class="move-guide" aria-live="polite" aria-label="这步怎么走">
+            <strong>这步怎么走</strong>
+            <p id="coach-reason">下棋前先看：自己有没有能连成五的点；再看对方有没有四连、活三需要马上挡住。</p>
+          </section>
           <div class="board-coordinate-shell">
             <div id="column-labels" class="coordinate-labels columns" aria-hidden="true"></div>
             <div id="row-labels" class="coordinate-labels rows" aria-hidden="true"></div>
@@ -44,7 +47,6 @@
         <aside class="coach-card" aria-live="polite">
           <div class="coach-title"><span>🌱</span><h3>五子棋小老师</h3></div>
           <p id="coach-main">开局先靠近中心落子：那里能向横、竖、两条斜线同时发展。</p>
-          <div class="coach-rule"><strong>这步怎么看</strong><p id="coach-reason">下棋前先看：自己有没有能连成五的点；再看对方有没有四连、活三需要马上挡住。</p></div>
           <div id="next-tip-card" class="next-tip hidden"><strong>下一步建议</strong><p id="next-tip"></p></div>
           <p class="coord-note">棋盘边上的字母和数字能帮你找到提示的交叉点。</p>
         </aside>

@@ -16,7 +16,6 @@
     $('coach-reason').textContent = reason;
     $('next-tip').textContent = next;
   }
-  function setTurn(text) { $('turn-card').textContent = text; }
   function hideHint() {
     suggestion = null;
     $('next-tip-card').classList.add('hidden');
@@ -194,7 +193,7 @@
     const humanInfo = evaluateMove(x, y, HUMAN); // occupied now, only used for friendly explanation below
     render();
     if (winnerAt(x, y, HUMAN)) { finish(HUMAN, '太棒了，语语连成五子获胜！这说明你找到了能够延伸的一条线。'); return; }
-    current = AI; thinking = true; setTurn('电脑正在思考：先看有没有必须防守的点…');
+    current = AI; thinking = true;
     message.textContent = `语语下在 ${coord(x, y)}。电脑正在判断进攻和防守。`;
     setCoach(`你下在 ${coord(x, y)}。`, '好习惯：每落一子都要同时数一数自己和对方能连成几子。', '等电脑落子后，我会给你下一步建议。');
     render(); setTimeout(computerMove, 70);
@@ -205,14 +204,12 @@
     board[move.y][move.x] = AI; lastMove = { x: move.x, y: move.y, color: AI }; thinking = false;
     if (winnerAt(move.x, move.y, AI)) { render(); finish(AI, `电脑在 ${coord(move.x, move.y)} 连成五子。本局结束，但你可以从它的最后一步学会先看四连。`); return; }
     current = HUMAN; const advice = humanAdvice(); hideHint();
-    setTurn('轮到语语下棋 · 先看右边的下一步建议');
     message.className = 'message'; message.textContent = `电脑下在 ${coord(move.x, move.y)}。轮到语语。`;
     setCoach(`电脑下在 ${coord(move.x, move.y)}。`, move.reason, advice.text);
     render();
   }
   function finish(color, lesson) {
     finished = true; thinking = false; suggestion = null;
-    setTurn(color === HUMAN ? '语语获胜！🎉' : '电脑获胜，本局结束');
     message.className = `message ${color === HUMAN ? 'success' : 'error'}`;
     message.textContent = color === HUMAN ? '语语赢了！点击“开新一局”继续练习。' : '这一局电脑赢了。点击“开新一局”再来一次。';
     setCoach(color === HUMAN ? '恭喜语语连成五子！' : '这局先到这里。', lesson, '复盘时先找：哪一步开始出现了活三、冲四或必须堵住的四连？');
@@ -221,7 +218,6 @@
   function resetGame() {
     board = newBoard(); current = HUMAN; thinking = false; finished = false; lastMove = null; hideHint();
     message.className = 'message'; message.textContent = '点击一个交叉点开始下棋。';
-    setTurn('轮到语语下棋');
     setCoach('开局先占住中心附近。', '中心的棋子最灵活：横、竖、两条斜线都能继续发展。', '第一手试试棋盘中央的 H8。');
     render();
   }
