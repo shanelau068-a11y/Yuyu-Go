@@ -191,7 +191,7 @@
     board[move.y][move.x] = AI; lastMove = { x: move.x, y: move.y, color: AI }; thinking = false;
     if (winnerAt(move.x, move.y, AI)) { render(); finish(AI, `电脑在 ${coord(move.x, move.y)} 连成五子。本局结束，但你可以从它的最后一步学会先看四连。`); return; }
     current = HUMAN; const advice = humanAdvice(); suggestion = advice.move ? { x: advice.move.x, y: advice.move.y } : null;
-    setTurn('轮到语语（黑棋） · 先看右边的下一步建议');
+    setTurn('轮到语语下棋 · 先看右边的下一步建议');
     message.className = 'message'; message.textContent = `电脑下在 ${coord(move.x, move.y)}。轮到语语。`;
     setCoach(`电脑下在 ${coord(move.x, move.y)}。`, move.reason, advice.text);
     render();
@@ -206,13 +206,12 @@
   }
   function resetGame() {
     board = newBoard(); current = HUMAN; thinking = false; finished = false; lastMove = null; suggestion = { x: 7, y: 7 };
-    message.className = 'message'; message.textContent = '点击一个交叉点，让语语先下黑棋。';
-    setTurn('轮到语语（黑棋）先走');
+    message.className = 'message'; message.textContent = '点击一个交叉点开始下棋。';
+    setTurn('轮到语语下棋');
     setCoach('开局先占住中心附近。', '中心的棋子最灵活：横、竖、两条斜线都能继续发展。', '第一手试试棋盘中央的 H8。');
     render();
   }
   $('new-game').addEventListener('click', resetGame);
-  $('new-game-top').addEventListener('click', resetGame);
   $('difficulty').addEventListener('change', resetGame);
   renderLabels(); resetGame();
 })();

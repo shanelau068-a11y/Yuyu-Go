@@ -14,28 +14,25 @@
           <p class="eyebrow">边下边学，慢慢变厉害</p>
           <h1>语语专用五子棋</h1>
         </div>
-        <button id="new-game-top" class="text-button" type="button">重新开始</button>
+        <section class="controls" aria-label="对局设置">
+          <label>难度
+            <select id="difficulty">
+              <option value="easy">简单 · 陪练讲解</option>
+              <option value="hard" selected>困难 · 认真对弈</option>
+            </select>
+          </label>
+          <button id="new-game" class="primary-button" type="button">开新一局</button>
+        </section>
       </header>
 
-      <section class="intro">
-        <span class="tag">人机学习对弈</span>
-        <h2>先连成五子，也要学会看住对方</h2>
-        <p>语语执黑先走。每次电脑落子后，右边都会告诉你它为什么这么下，并提示你下一步可以想哪里。</p>
-      </section>
-
-      <section class="controls" aria-label="对局设置">
-        <label>难度
-          <select id="difficulty">
-            <option value="easy">简单 · 陪练讲解</option>
-            <option value="hard" selected>困难 · 认真对弈</option>
-          </select>
-        </label>
-        <button id="new-game" class="primary-button" type="button">开新一局</button>
+      <section class="quick-learn" aria-label="五子棋学习口诀">
+        <strong>五子棋三步看：</strong>
+        <span>① 有五先赢</span><span>② 对方四连先挡</span><span>③ 再做活三</span>
       </section>
 
       <section class="game-layout">
         <div class="board-column">
-          <div class="turn-card" id="turn-card" aria-live="polite">轮到语语（黑棋）先走</div>
+          <div class="turn-card" id="turn-card" aria-live="polite">轮到语语下棋</div>
           <div class="board-coordinate-shell">
             <div id="column-labels" class="coordinate-labels columns" aria-hidden="true"></div>
             <div id="row-labels" class="coordinate-labels rows" aria-hidden="true"></div>
