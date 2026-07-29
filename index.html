@@ -3,84 +3,58 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f6c56e" />
-    <title>语语专用围棋</title>
+    <meta name="theme-color" content="#e89b4a" />
+    <title>语语五子棋</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <main class="app-shell">
       <header>
         <div>
-          <p class="eyebrow">每天一题，棋力进步一点点</p>
-          <h1>语语专用围棋</h1>
+          <p class="eyebrow">边下边学，慢慢变厉害</p>
+          <h1>语语专用五子棋</h1>
         </div>
-        <div class="header-actions">
-          <button id="go-sound-toggle" type="button" aria-pressed="true">🔊 声音开</button>
-          <button class="text-button" id="reset-progress" type="button">重新开始</button>
-        </div>
+        <button id="new-game-top" class="text-button" type="button">重新开始</button>
       </header>
 
-      <nav class="mode-switch" aria-label="练习模式">
-        <button id="puzzle-mode" class="active" type="button">闯关题库</button>
-        <button id="ai-mode" type="button">人机对弈</button>
-      </nav>
-
-      <section id="progress-card" class="progress-card" aria-label="闯关进度">
-        <div class="progress-copy"><span id="progress-label">第 1 / 8 关</span><strong id="stars">⭐ 0</strong></div>
-        <div class="progress-track"><div id="progress-bar"></div></div>
+      <section class="intro">
+        <span class="tag">人机学习对弈</span>
+        <h2>先连成五子，也要学会看住对方</h2>
+        <p>语语执黑先走。每次电脑落子后，右边都会告诉你它为什么这么下，并提示你下一步可以想哪里。</p>
       </section>
 
-      <section class="lesson" aria-live="polite">
-        <div class="tag" id="level-tag">第 1 关 · 吃子</div>
-        <h2 id="problem-title">最后一口气</h2>
-        <p id="problem-text">轮到黑棋。点在白棋最后一口气上，把它吃掉！</p>
+      <section class="controls" aria-label="对局设置">
+        <label>难度
+          <select id="difficulty">
+            <option value="easy">简单 · 陪练讲解</option>
+            <option value="hard" selected>困难 · 认真对弈</option>
+          </select>
+        </label>
+        <button id="new-game" class="primary-button" type="button">开新一局</button>
       </section>
 
-      <section class="tip-card">
-        <h3>本关小知识</h3>
-        <p id="tip-text">棋子上下左右相邻的空点叫作“气”。没有气的棋子会被提走。</p>
-      </section>
-
-      <section class="board-wrap">
-        <div class="board-coordinate-shell">
-          <div id="column-labels" class="coordinate-labels columns" aria-hidden="true"></div>
-          <div id="row-labels" class="coordinate-labels rows" aria-hidden="true"></div>
-          <div id="board" class="board" role="grid" aria-label="围棋棋盘"></div>
+      <section class="game-layout">
+        <div class="board-column">
+          <div class="turn-card" id="turn-card" aria-live="polite">轮到语语（黑棋）先走</div>
+          <div class="board-coordinate-shell">
+            <div id="column-labels" class="coordinate-labels columns" aria-hidden="true"></div>
+            <div id="row-labels" class="coordinate-labels rows" aria-hidden="true"></div>
+            <div id="board" class="board" role="grid" aria-label="15路五子棋棋盘"></div>
+          </div>
         </div>
+
+        <aside class="coach-card" aria-live="polite">
+          <div class="coach-title"><span>🌱</span><h3>五子棋小老师</h3></div>
+          <p id="coach-main">开局先靠近中心落子：那里能向横、竖、两条斜线同时发展。</p>
+          <div class="coach-rule"><strong>这步怎么看</strong><p id="coach-reason">下棋前先看：自己有没有能连成五的点；再看对方有没有四连、活三需要马上挡住。</p></div>
+          <div class="next-tip"><strong>下一步建议</strong><p id="next-tip">第一手试试棋盘中央的 H8。</p></div>
+          <p class="coord-note">棋盘边上的字母和数字能帮你找到提示的交叉点。</p>
+        </aside>
       </section>
 
-      <section id="puzzle-actions" class="hint-row">
-        <button class="secondary-button" id="hint-button" type="button">💡 看提示</button>
-        <button class="primary-button" id="next-button" type="button" disabled>下一关 →</button>
-      </section>
-
-      <section id="ai-actions" class="ai-actions hidden" aria-label="人机对弈设置">
-        <label>棋盘
-          <select id="go-board-size">
-            <option value="9" selected>9 路</option>
-            <option value="13">13 路（较慢）</option>
-          </select>
-        </label>
-        <label>电脑
-          <select id="go-ai-level">
-            <option value="gnugo" selected>GNU Go 增强</option>
-          </select>
-        </label>
-        <button id="go-pass" class="secondary-button" type="button">停一手</button>
-        <button id="go-new-game" class="primary-button" type="button">新对局</button>
-      </section>
-      <p id="ai-game-info" class="ai-game-info hidden"></p>
-      <p id="message" class="message" aria-live="assertive">请选择一个交叉点落子。</p>
-
-      <p id="source-note" class="source-note">题目：自编入门练习</p>
+      <p id="message" class="message" aria-live="assertive">点击一个交叉点，让语语先下黑棋。</p>
+      <p class="source-note">本地五子棋 AI：棋型识别、威胁判断与 Alpha-Beta 搜索；无需联网。</p>
     </main>
-    <script src="classic-batch-1.js"></script>
-    <script src="classic-batch-2.js"></script>
-    <script src="classic-batch-3.js"></script>
-    <script src="classic-batch-4.js"></script>
-    <script src="classic-batch-5.js"></script>
-    <script src="classic-batch-6.js"></script>
-    <script src="app.js"></script>
-    <script src="go-ai.js"></script>
+    <script src="gomoku.js"></script>
   </body>
 </html>

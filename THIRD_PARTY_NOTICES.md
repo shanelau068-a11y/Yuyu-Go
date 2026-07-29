@@ -17,6 +17,10 @@ The local Go rules and Monte Carlo Tree Search implementation in `go-ai.js` is a
 
 Human-vs-computer play uses the browser port [dna2ai/gnugo.js](https://github.com/dna2ai/gnugo.js), which embeds GNU Go. GNU Go is distributed under the GNU General Public License; the corresponding license text is included in `COPYING-GNUGO.txt`. The existing JavaScript engine in `go-ai.js` remains as a fallback if the enhanced engine cannot be loaded.
 
+## Gomoku learning mode
+
+The active website is the standalone Gomoku learning mode in `gomoku.js`. It is an original browser implementation using pattern recognition, tactical threat checks, and Alpha-Beta search; it does not load the legacy Go puzzle or GNU Go scripts. The algorithm choice was informed by publicly documented Gomoku approaches, including [kevin2014123/gomoku-ai](https://github.com/kevin2014123/gomoku-ai), whose project documents Minimax, Alpha-Beta pruning, iterative deepening, move ordering, and pattern evaluation under GPL-3.0. No code from that project is included here.
+
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
